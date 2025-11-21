@@ -66,10 +66,10 @@ stream = ExtResource("7_1fga6")
 [node name="ActionsButtonVBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 1082.0
-offset_top = 282.0
-offset_right = 1746.0
-offset_bottom = 282.0
+offset_left = 1083.0
+offset_top = 412.0
+offset_right = 1747.0
+offset_bottom = 975.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 unique_name_in_owner = true

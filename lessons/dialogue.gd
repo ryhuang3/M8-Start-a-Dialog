@@ -19,31 +19,32 @@ var dialogue_items: Array[Dictionary] = [
 		"character": bodies["sophia"],
 		"choices": {
 			"Let me sleep a little longer": 2,
-			"Good Morning": 1,
+			"Good Morning": 3,
 		},
 	},
 	{
 		"expression": expressions["happy"],
-		"text": "So today we are going to be grinding.": bodies["sophia"],
+		"text": "Today, we're going to be grinding!",
+		"character": bodies["sophia"],
 		"choices": {
+			"Bruh, really?": 3,
 			"...": 2,
-			"No, let me go back to sleep": 1,
 		},
 	},
 	{
 		"expression": expressions["sad"],
-		"text": "Oh, come on! It'll be fun.",
+		"text": "what's with that face",
 		"character": bodies["pink"],
 		"choices": {
-			"Nah, I'm Good": 1,
-			"Alright, I'll try": 1,
+			"I'm tired.": 3,
+			"Nothing": 2,
 		},
 	},
 	{
 		"expression": expressions["happy"],
-		"text": "That's the spirit! [wave]You can do it![/wave]",
+		"text": "Oh don't be a baby, let's go.",
 		"character": bodies["pink"],
-		"choices": {"Okay! (Quit)": - 1},
+		"choices": {"Whatever. (Quit)":  3},
 	},
 ]
 
