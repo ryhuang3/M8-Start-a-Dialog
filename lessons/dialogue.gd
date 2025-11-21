@@ -11,49 +11,47 @@ var bodies := {
 	"pink": preload ("res://assets/pink.png")
 }
 
+
 var dialogue_items: Array[Dictionary] = [
 	{
-		"expression": expressions["regular"],
-		"text": "I've been learning about [wave]Arrays and Dictionaries[/wave]",
-		"character": bodies["sophia"]
-	},
-	{
-		"expression": expressions["regular"],
-		"text": "How has it been going?",
-		"character": bodies["pink"]
-	},
-	{
-		"expression": expressions["sad"],
-		"text": "... Well... it is a little bit [shake]complicated[/shake]!",
-		"character": bodies["sophia"]
-	},
-	{
-		"expression": expressions["sad"],
-		"text": "Oh!",
-		"character": bodies["pink"]
-	},
-	{
-		"expression": expressions["regular"],
-		"text": "I believe in you!",
-		"character": bodies["pink"]
+		"expression": expressions["happy"],
+		"text": "GOOD MORNING",
+		"character": bodies["sophia"],
+		"choices": {
+			"Let me sleep a little longer": 2,
+			"Good Morning": 1,
+		},
 	},
 	{
 		"expression": expressions["happy"],
-		"text": "If you stick to it, you'll eventually make it!",
-		"character": bodies["pink"]
+		"text": "So today we are going to be grinding.": bodies["sophia"],
+		"choices": {
+			"...": 2,
+			"No, let me go back to sleep": 1,
+		},
+	},
+	{
+		"expression": expressions["sad"],
+		"text": "Oh, come on! It'll be fun.",
+		"character": bodies["pink"],
+		"choices": {
+			"Nah, I'm Good": 1,
+			"Alright, I'll try": 1,
+		},
 	},
 	{
 		"expression": expressions["happy"],
-		"text": "That's it! Let's [tornado freq=3.0][rainbow val=1.0]GOOOOOO!!![/rainbow][/tornado]",
-		"character": bodies["sophia"]
-	}
+		"text": "That's the spirit! [wave]You can do it![/wave]",
+		"character": bodies["pink"],
+		"choices": {"Okay! (Quit)": - 1},
+	},
 ]
 
 @onready var rich_text_label: RichTextLabel = %RichTextLabel
-@onready var action_buttons_v_box_container: VBoxContainer = %ActionButtonsVBoxContainer
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 @onready var body: TextureRect = %Body
 @onready var expression: TextureRect = %Expression
+@onready var action_buttons_v_box_container: VBoxContainer = %ActionsButtonVBoxContainer
 
 
 func _ready() -> void:
@@ -61,11 +59,10 @@ func _ready() -> void:
 
 func show_text(current_item_index: int) -> void:
 	var current_item := dialogue_items[current_item_index]
-
 	rich_text_label.text = current_item["text"]
 	expression.texture = current_item["expression"]
 	body.texture = current_item["character"]
-
+	create_buttons(current_item["choices"])
 	rich_text_label.visible_ratio = 0.0
 	var tween := create_tween()
 	var text_appearing_duration: float = current_item["text"].length() / 30.0
@@ -77,9 +74,26 @@ func show_text(current_item_index: int) -> void:
 
 	slide_in()
 
+	for button: Button in action_buttons_v_box_container.get_children():
+		button.disabled = true
+	tween.finished.connect(func() -> void:
+		for button: Button in action_buttons_v_box_container.get_children():
+			button.disabled = false
+	)
 
 
-
+func create_buttons(choices_data: Dictionary) -> void:
+	for button in action_buttons_v_box_container.get_children():
+		button.queue_free()
+	for choice_text in choices_data:
+		var button := Button.new()
+		action_buttons_v_box_container.add_child(button)
+		button.text = choice_text
+		var target_line_idx: int = choices_data[choice_text]
+		if target_line_idx == - 1:
+			button.pressed.connect(get_tree().quit)
+		else:
+			button.pressed.connect(show_text.bind(target_line_idx))
 
 func slide_in() -> void:
 	var slide_tween := create_tween()
