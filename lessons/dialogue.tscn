@@ -11,9 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bhinvhx75etr2" path="res://assets/emotion_sad.png" id="6_gkm7m"]
 [ext_resource type="AudioStream" uid="uid://chgko4hmxwxu5" path="res://assets/talking_synth.ogg" id="7_1fga6"]
 
-[sub_resource type="Resource" id="Resource_1m3r0"]
+[sub_resource type="Resource" id="Resource_ujubm"]
 script = ExtResource("5_rjbgl")
-text = "Because it is..."
 metadata/_custom_type_script = "uid://b61dck70nj6s7"
 
 [sub_resource type="Resource" id="Resource_1f3kq"]
@@ -28,7 +27,7 @@ metadata/_custom_type_script = "uid://b61dck70nj6s7"
 
 [sub_resource type="Resource" id="Resource_5rpy8"]
 script = ExtResource("3_ujubm")
-choices = Array[ExtResource("5_rjbgl")]([SubResource("Resource_1m3r0"), SubResource("Resource_1f3kq"), SubResource("Resource_m4u2h")])
+choices = Array[ExtResource("5_rjbgl")]([SubResource("Resource_ujubm"), SubResource("Resource_1f3kq"), SubResource("Resource_m4u2h")])
 expression = ExtResource("6_gkm7m")
 text = "Why is this lesson so hard"
 metadata/_custom_type_script = "uid://dei5f1ruqnct7"
